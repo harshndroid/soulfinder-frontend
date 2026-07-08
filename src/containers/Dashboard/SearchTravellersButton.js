@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../components/Button';
 import ApiService from '../../services/ApiService';
 import ApiConstants from '../../constants/ApiConstants';
+import AppConstants from '../../constants/AppConstants';
 import LocalStorageService from '../../services/LocalStorageService';
 import StorageConstants from '../../constants/StorageConstants';
 import distanceHelper from '../../utils/distanceHelper';
@@ -36,13 +37,16 @@ const SearchTravellersButton = ({
 
               let usersInRange = [];
               for (let key in otherUsers) {
+                const otherUserLocation = otherUsers[key].location;
+                if (!otherUserLocation) continue;
                 const distance = distanceHelper.getDistanceFromLatLonInKm(
                   coords.latitude,
                   coords.longitude,
-                  otherUsers[key].location.latitude,
-                  otherUsers[key].location.longitude
+                  otherUserLocation.latitude,
+                  otherUserLocation.longitude
                 );
-                if (distance) usersInRange.push(otherUsers[key]);
+                if (distance <= AppConstants.NEARBY_RADIUS_METERS)
+                  usersInRange.push(otherUsers[key]);
               }
               setNearbyTravellers(usersInRange);
             })

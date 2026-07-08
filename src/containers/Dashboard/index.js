@@ -73,7 +73,10 @@ const Dashboard = () => {
         content={photo}
         onClickContent={() => setShowUpdateUserModal(true)}
       />
-      <TravellerCards nearbyTravellers={nearbyTravellers} />
+      <TravellerCards
+        nearbyTravellers={nearbyTravellers}
+        setNearbyTravellers={setNearbyTravellers}
+      />
       <SearchTravellersButton
         coords={coords}
         nearbyTravellers={nearbyTravellers}

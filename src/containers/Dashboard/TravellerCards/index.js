@@ -1,9 +1,16 @@
 import React from 'react';
 import CallButton from './CallButton';
+import BlockButton from './BlockButton';
 import Photo from './Photo';
 import Styles from '../../../styles/DashboardStyles';
 
-const TravellerCards = ({ nearbyTravellers }) => {
+const TravellerCards = ({ nearbyTravellers, setNearbyTravellers }) => {
+  const handleBlock = (blockedUserId) => {
+    setNearbyTravellers((prev) =>
+      prev.filter((ele) => ele._id !== blockedUserId)
+    );
+  };
+
   return (
     <div style={Styles.travellerCardsWrapper}>
       {nearbyTravellers.map((ele) => (
@@ -11,6 +18,7 @@ const TravellerCards = ({ nearbyTravellers }) => {
           <Photo ele={ele} />
           <div style={{ flex: 1 }} />
           <CallButton ele={ele} />
+          <BlockButton ele={ele} onBlock={handleBlock} />
         </div>
       ))}
     </div>

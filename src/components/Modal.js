@@ -18,6 +18,8 @@ const Modal = ({ photo, open, onClose }) => {
 
   const [name, setName] = useState('');
   const [age, setAge] = useState(0);
+  const [bio, setBio] = useState('');
+  const [currentCity, setCurrentCity] = useState('');
   const [updatedPhoto, setUpdatedPhoto] = useState('');
 
   const ref = useRef(null);
@@ -109,6 +111,26 @@ const Modal = ({ photo, open, onClose }) => {
           defaultValue={user.age}
           onChange={(e) => setAge(e.target.value)}
         />
+        <TextField
+          style={{ margin: 8 }}
+          id="outlined-basic"
+          label="Current City"
+          variant="outlined"
+          size="small"
+          defaultValue={user.currentCity}
+          onChange={(e) => setCurrentCity(e.target.value)}
+        />
+        <TextField
+          style={{ margin: 8 }}
+          id="outlined-basic"
+          label="Bio"
+          variant="outlined"
+          size="small"
+          multiline
+          rows={2}
+          defaultValue={user.bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
         <Button
           title="Save"
           style={{ margin: 10 }}
@@ -117,6 +139,8 @@ const Modal = ({ photo, open, onClose }) => {
               ...(updatedPhoto && { photoUrl: updatedPhoto }),
               ...(name && { name }),
               ...(age && { age }),
+              ...(currentCity && { currentCity }),
+              ...(bio && { bio }),
             };
             ApiService.fetchApi(
               ApiConstants.UPDATE_USER_PROFILE,

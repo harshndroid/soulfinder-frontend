@@ -22,6 +22,14 @@ const Photo = ({ ele }) => {
       <div style={{ fontSize: 14 }}>
         {ele.name}, {ele.age}
       </div>
+      {ele.currentCity && (
+        <div style={{ fontSize: 12, color: '#777' }}>{ele.currentCity}</div>
+      )}
+      {ele.bio && (
+        <div style={{ fontSize: 12, color: '#777', textAlign: 'center' }}>
+          {ele.bio}
+        </div>
+      )}
     </div>
   );
 };
