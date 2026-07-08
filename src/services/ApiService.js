@@ -1,5 +1,6 @@
 import StorageConstants from '../constants/StorageConstants';
 import LocalStorageService from './LocalStorageService';
+import LoaderService from './LoaderService';
 
 export default {
   fetchApi(apiEndpoint, method, requestPayload) {
@@ -16,10 +17,11 @@ export default {
         ? `${process.env.REACT_APP_API_URL_LOCAL}${apiEndpoint}`
         : `${process.env.REACT_APP_API_URL}${apiEndpoint}`;
 
+    LoaderService.start();
     return fetch(url, {
       method,
       headers,
       ...(requestPayload && { body: JSON.stringify(requestPayload) }),
-    });
+    }).finally(() => LoaderService.stop());
   },
 };
