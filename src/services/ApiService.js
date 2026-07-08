@@ -2,6 +2,11 @@ import StorageConstants from '../constants/StorageConstants';
 import LocalStorageService from './LocalStorageService';
 import LoaderService from './LoaderService';
 
+export const getBaseApiUrl = () =>
+  process.env.REACT_APP_ENV === 'dev'
+    ? process.env.REACT_APP_API_URL_LOCAL
+    : process.env.REACT_APP_API_URL;
+
 export default {
   fetchApi(apiEndpoint, method, requestPayload) {
     const user = LocalStorageService.getItem(StorageConstants.USER);
@@ -12,10 +17,7 @@ export default {
     };
     if (token) headers.Authorization = `Bearer ${token}`;
 
-    const url =
-      process.env.REACT_APP_ENV === 'dev'
-        ? `${process.env.REACT_APP_API_URL_LOCAL}${apiEndpoint}`
-        : `${process.env.REACT_APP_API_URL}${apiEndpoint}`;
+    const url = `${getBaseApiUrl()}${apiEndpoint}`;
 
     LoaderService.start();
     return fetch(url, {

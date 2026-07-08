@@ -4,4 +4,5 @@ export default {
   UPDATE_USER_PROFILE: '/updateUserProfile',
   NEAR_BY_TRAVELLERS: '/nearbyTravellers',
   BLOCK_USER: '/blockUser',
+  MESSAGES: '/messages',
 };
