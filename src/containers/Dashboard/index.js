@@ -9,6 +9,7 @@ import ApiService from '../../services/ApiService';
 import LocalStorageService from '../../services/LocalStorageService';
 import StorageConstants from '../../constants/StorageConstants';
 import ApiConstants from '../../constants/ApiConstants';
+import fetchNearbyTravellers from './fetchNearbyTravellers';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -55,6 +56,14 @@ const Dashboard = () => {
               ...updatedUserData,
             });
             setPhoto(data.data.photoUrl);
+            fetchNearbyTravellers(
+              {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+              },
+              user?.userId,
+              setNearbyTravellers
+            );
           })
           .catch((e) => console.log('Init api error:', e));
       });
