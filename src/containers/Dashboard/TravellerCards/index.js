@@ -1,5 +1,4 @@
 import React from 'react';
-import CallButton from './CallButton';
 import BlockButton from './BlockButton';
 import ChatButton from './ChatButton';
 import Photo from './Photo';
@@ -19,7 +18,6 @@ const TravellerCards = ({ nearbyTravellers, setNearbyTravellers }) => {
           <Photo ele={ele} />
           <div style={{ flex: 1 }} />
           <ChatButton ele={ele} />
-          <CallButton ele={ele} />
           <BlockButton ele={ele} onBlock={handleBlock} />
         </div>
       ))}
