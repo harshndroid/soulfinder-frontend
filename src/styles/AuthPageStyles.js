@@ -13,13 +13,14 @@ export default {
     height: '100%',
     width: '100%',
     position: 'absolute',
-    opacity: 0.6,
+    // opacity: 0.9,
   },
   title: {
     textAlign: 'center',
     fontWeight: 600,
     marginTop: 50,
-    fontStyle: 'italic',
+    position: 'absolute',
+    fontSize: 20,
   },
   bottomWrapper: {
     display: 'flex',
