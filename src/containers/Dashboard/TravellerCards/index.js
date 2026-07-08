@@ -7,7 +7,7 @@ const TravellerCards = ({ nearbyTravellers }) => {
   return (
     <div style={Styles.travellerCardsWrapper}>
       {nearbyTravellers.map((ele) => (
-        <div key={ele.phone} style={Styles.cardWrapper}>
+        <div key={ele._id} style={Styles.cardWrapper}>
           <Photo ele={ele} />
           <div style={{ flex: 1 }} />
           <CallButton ele={ele} />
