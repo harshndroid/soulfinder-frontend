@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from '../../styles/AuthPageStyles';
-import BackgroundImg from '../../assets/background.webp';
+import BackgroundImg from '../../assets/solo.jpg';
 
 const Background = () => {
   return (
