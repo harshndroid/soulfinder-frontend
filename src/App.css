@@ -10,3 +10,16 @@ textarea:focus,
 button:focus {
     outline: none;
 }
+
+#root>div {
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 480px) {
+  #root>div {
+    box-shadow: none;
+  }
+}

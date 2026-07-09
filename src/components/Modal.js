@@ -29,7 +29,8 @@ const Modal = ({ photo, open, onClose }) => {
       <div
         style={{
           height: '60vh',
-          width: '40vh',
+          width: '80vw',
+          maxWidth: 320,
           paddingTop: 16,
           display: 'flex',
           flexDirection: 'column',
