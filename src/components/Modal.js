@@ -25,13 +25,14 @@ const Modal = ({ photo, open, onClose }) => {
   const ref = useRef(null);
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      PaperProps={{ style: { borderRadius: 16, width: '85vw', maxWidth: 360 } }}
+    >
       <div
         style={{
-          height: '60vh',
-          width: '80vw',
-          maxWidth: 320,
-          paddingTop: 16,
+          padding: '28px 24px 20px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -40,8 +41,9 @@ const Modal = ({ photo, open, onClose }) => {
         <div
           style={{
             textAlign: 'center',
-            fontWeight: 600,
-            fontSize: 18,
+            fontWeight: 700,
+            fontSize: 19,
+            marginBottom: 20,
           }}
         >
           Update your profile
@@ -49,7 +51,8 @@ const Modal = ({ photo, open, onClose }) => {
         <input
           ref={ref}
           type="file"
-          style={{ visibility: 'hidden' }}
+          accept="image/*"
+          style={{ display: 'none' }}
           onChange={(event) => {
             const selectedFile = event.target.files[0];
             S3FileUpload.uploadFile(selectedFile, awsConfig)
@@ -63,11 +66,13 @@ const Modal = ({ photo, open, onClose }) => {
           <img
             alt="img"
             style={{
-              width: 80,
-              height: 80,
+              width: 88,
+              height: 88,
               borderRadius: '50%',
               objectFit: 'cover',
-              margin: 16,
+              marginBottom: 24,
+              cursor: 'pointer',
+              border: '2px solid #e4a36b',
             }}
             src={photo || updatedPhoto}
             onClick={() => {
@@ -77,25 +82,27 @@ const Modal = ({ photo, open, onClose }) => {
         ) : (
           <div
             style={{
-              width: 80,
-              height: 80,
+              width: 88,
+              height: 88,
               borderRadius: '50%',
-              margin: 16,
-              border: '1px solid #ccc',
+              marginBottom: 24,
+              backgroundColor: '#faf1e8',
+              border: '2px dashed #e4a36b',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              cursor: 'pointer',
             }}
             onClick={() => {
               ref.current.click();
             }}
           >
-            <CameraAltIcon style={{ color: '#ccc' }} />
+            <CameraAltIcon style={{ color: '#e4a36b', fontSize: 28 }} />
           </div>
         )}
         <TextField
-          style={{ margin: 8 }}
-          id="outlined-basic"
+          fullWidth
+          style={{ marginBottom: 14 }}
           label="Name"
           variant="outlined"
           size="small"
@@ -103,9 +110,9 @@ const Modal = ({ photo, open, onClose }) => {
           onChange={(e) => setName(e.target.value)}
         />
         <TextField
+          fullWidth
           type="number"
-          style={{ margin: 8 }}
-          id="outlined-basic"
+          style={{ marginBottom: 14 }}
           label="Age"
           variant="outlined"
           size="small"
@@ -113,8 +120,8 @@ const Modal = ({ photo, open, onClose }) => {
           onChange={(e) => setAge(e.target.value)}
         />
         <TextField
-          style={{ margin: 8 }}
-          id="outlined-basic"
+          fullWidth
+          style={{ marginBottom: 14 }}
           label="Current City"
           variant="outlined"
           size="small"
@@ -122,8 +129,8 @@ const Modal = ({ photo, open, onClose }) => {
           onChange={(e) => setCurrentCity(e.target.value)}
         />
         <TextField
-          style={{ margin: 8 }}
-          id="outlined-basic"
+          fullWidth
+          style={{ marginBottom: 22 }}
           label="Bio"
           variant="outlined"
           size="small"
@@ -134,7 +141,7 @@ const Modal = ({ photo, open, onClose }) => {
         />
         <Button
           title="Save"
-          style={{ margin: 10 }}
+          style={{ width: '100%', marginBottom: 10 }}
           onClick={() => {
             const requestPayload = {
               ...(updatedPhoto && { photoUrl: updatedPhoto }),
@@ -173,7 +180,12 @@ const Modal = ({ photo, open, onClose }) => {
         />
         <Button
           title="Logout"
-          style={{ margin: 10 }}
+          style={{
+            width: '100%',
+            backgroundColor: 'transparent',
+            color: '#999',
+            boxShadow: 'none',
+          }}
           onClick={() => {
             LocalStorageService.removeItem(StorageConstants.USER);
             navigate('/login');

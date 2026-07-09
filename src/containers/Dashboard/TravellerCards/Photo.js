@@ -8,28 +8,34 @@ const Photo = ({ ele }) => {
     AppConstants.LAST_SEEN_DURATION_LIMIT * 60 * 1000
       ? true
       : false;
+
+  const statusColor = isTravellerActive ? '#1da05f' : '#acacac';
+
   return (
-    <div style={Styles.imgWrapper}>
-      <img alt="img" style={Styles.img} src={ele.photoUrl} />
-      <div
-        style={{
-          ...Styles.statusCard,
-          backgroundColor: isTravellerActive ? '#1da05f' : '#acacac',
-        }}
-      >
-        {isTravellerActive ? 'Active' : 'Inactive'}
+    <div style={Styles.cardTopRow}>
+      <div style={Styles.imgWrapper}>
+        <img alt="img" style={Styles.img} src={ele.photoUrl} />
+        <div style={{ ...Styles.statusDot, backgroundColor: statusColor }} />
       </div>
-      <div style={{ fontSize: 14 }}>
-        {ele.name}, {ele.age}
-      </div>
-      {ele.currentCity && (
-        <div style={{ fontSize: 12, color: '#777' }}>{ele.currentCity}</div>
-      )}
-      {ele.bio && (
-        <div style={{ fontSize: 12, color: '#777', textAlign: 'center' }}>
-          {ele.bio}
+      <div style={Styles.infoWrapper}>
+        <div style={Styles.nameRow}>
+          <span style={Styles.name}>
+            {ele.name}, {ele.age}
+          </span>
+          <span
+            style={{
+              ...Styles.statusLabel,
+              color: statusColor,
+              backgroundColor: isTravellerActive ? '#e7f7ee' : '#f0f0f0',
+            }}
+          >
+            {isTravellerActive ? 'Active' : 'Inactive'}
+          </span>
         </div>
-      )}
+        {ele.currentCity && (
+          <div style={Styles.currentCity}>{ele.currentCity}</div>
+        )}
+      </div>
     </div>
   );
 };

@@ -7,10 +7,10 @@ const Button = ({ title, onClick, style }) => {
       variant="contained"
       onClick={onClick}
       style={{
-        ...style,
         textTransform: 'capitalize',
         height: 33,
         backgroundColor: '#e4a36b',
+        ...style,
       }}
     >
       {title}

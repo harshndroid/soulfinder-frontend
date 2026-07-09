@@ -16,9 +16,11 @@ const TravellerCards = ({ nearbyTravellers, setNearbyTravellers }) => {
       {nearbyTravellers.map((ele) => (
         <div key={ele._id} style={Styles.cardWrapper}>
           <Photo ele={ele} />
-          <div style={{ flex: 1 }} />
-          <ChatButton ele={ele} />
-          <BlockButton ele={ele} onBlock={handleBlock} />
+          {ele.bio && <div style={Styles.bio}>{ele.bio}</div>}
+          <div style={Styles.actionsRow}>
+            <ChatButton ele={ele} />
+            <BlockButton ele={ele} onBlock={handleBlock} />
+          </div>
         </div>
       ))}
     </div>
