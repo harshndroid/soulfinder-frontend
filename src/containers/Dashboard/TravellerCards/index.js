@@ -4,7 +4,11 @@ import ChatButton from './ChatButton';
 import Photo from './Photo';
 import Styles from '../../../styles/DashboardStyles';
 
-const TravellerCards = ({ nearbyTravellers, setNearbyTravellers }) => {
+const TravellerCards = ({
+  nearbyTravellers,
+  setNearbyTravellers,
+  unreadSenderIds = [],
+}) => {
   const handleBlock = (blockedUserId) => {
     setNearbyTravellers((prev) =>
       prev.filter((ele) => ele._id !== blockedUserId)
@@ -15,10 +19,13 @@ const TravellerCards = ({ nearbyTravellers, setNearbyTravellers }) => {
     <div style={Styles.travellerCardsWrapper}>
       {nearbyTravellers.map((ele) => (
         <div key={ele._id} style={Styles.cardWrapper}>
-          <Photo ele={ele} />
+          <Photo ele={ele} hasUnreadMessage={unreadSenderIds.includes(ele._id)} />
           {ele.bio && <div style={Styles.bio}>{ele.bio}</div>}
           <div style={Styles.actionsRow}>
-            <ChatButton ele={ele} />
+            <ChatButton
+              ele={ele}
+              hasUnreadMessage={unreadSenderIds.includes(ele._id)}
+            />
             <BlockButton ele={ele} onBlock={handleBlock} />
           </div>
         </div>

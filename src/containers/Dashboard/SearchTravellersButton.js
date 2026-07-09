@@ -12,17 +12,29 @@ const SearchTravellersButton = ({
   const user = LocalStorageService.getItem(StorageConstants.USER);
 
   return (
-    <Button
-      title={
-        nearbyTravellers.length === 0
-          ? 'Search nearby travellers'
-          : 'Refresh nearby travellers'
-      }
-      style={{ position: 'absolute', bottom: 40 }}
-      onClick={() => {
-        fetchNearbyTravellers(coords, user?.userId, setNearbyTravellers);
+    <div
+      style={{
+        position: 'sticky',
+        bottom: 0,
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '10px 0',
+        backgroundColor: '#fffffff2',
+        boxShadow: '0 -4px 10px rgba(0, 0, 0, 0.06)',
       }}
-    />
+    >
+      <Button
+        title={
+          nearbyTravellers.length === 0
+            ? 'Search nearby travellers'
+            : 'Refresh nearby travellers'
+        }
+        onClick={() => {
+          fetchNearbyTravellers(coords, user?.userId, setNearbyTravellers);
+        }}
+      />
+    </div>
   );
 };
 

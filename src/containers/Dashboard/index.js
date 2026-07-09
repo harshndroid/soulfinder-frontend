@@ -10,6 +10,7 @@ import LocalStorageService from '../../services/LocalStorageService';
 import StorageConstants from '../../constants/StorageConstants';
 import ApiConstants from '../../constants/ApiConstants';
 import fetchNearbyTravellers from './fetchNearbyTravellers';
+import SocketService from '../../services/SocketService';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ const Dashboard = () => {
   const [coords, setCoords] = useState({});
   const [nearbyTravellers, setNearbyTravellers] = useState([]);
   const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
-  console.log('here');
+  const [unreadSenderIds, setUnreadSenderIds] = useState([]);
+
   const user = LocalStorageService.getItem(StorageConstants.USER);
 
   useEffect(() => {
@@ -75,6 +77,35 @@ const Dashboard = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const fetchUnreadSenders = () => {
+      ApiService.fetchApi(`${ApiConstants.MESSAGES}/unread/senders`, 'GET')
+        .then((res) => {
+          if (res.status === 200 || res.status === 201) return res.json();
+          throw new Error('Api err');
+        })
+        .then((senderIds) => setUnreadSenderIds(senderIds))
+        .catch((e) => console.log('unread senders api error:', e));
+    };
+
+    fetchUnreadSenders();
+    window.addEventListener('focus', fetchUnreadSenders);
+
+    const socket = SocketService.connect();
+    socket.on('receiveMessage', (message) => {
+      if (message.receiverId === user?.userId) {
+        setUnreadSenderIds((prev) =>
+          prev.includes(message.senderId) ? prev : [...prev, message.senderId]
+        );
+      }
+    });
+
+    return () => {
+      window.removeEventListener('focus', fetchUnreadSenders);
+      socket.off('receiveMessage');
+    };
+  }, []);
+
   return (
     <div style={Styles.main}>
       <Modal
@@ -90,14 +121,13 @@ const Dashboard = () => {
       <TravellerCards
         nearbyTravellers={nearbyTravellers}
         setNearbyTravellers={setNearbyTravellers}
+        unreadSenderIds={unreadSenderIds}
       />
       <SearchTravellersButton
         coords={coords}
         nearbyTravellers={nearbyTravellers}
         setNearbyTravellers={setNearbyTravellers}
       />
-      <br />
-      <br />
     </div>
   );
 };

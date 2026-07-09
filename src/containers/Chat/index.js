@@ -28,6 +28,11 @@ const Chat = () => {
       .then((data) => setMessages(data))
       .catch((e) => console.log('fetch messages error:', e));
 
+    ApiService.fetchApi(
+      `${ApiConstants.MESSAGES}/${otherUserId}/markRead`,
+      'POST'
+    ).catch((e) => console.log('markRead api error:', e));
+
     const socket = SocketService.connect();
     socket.on('receiveMessage', (message) => {
       const isRelevant =

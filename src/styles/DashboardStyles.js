@@ -73,6 +73,16 @@ export default {
     borderRadius: '50%',
     border: '2px solid white',
   },
+  unreadDot: {
+    position: 'absolute',
+    top: -2,
+    right: -2,
+    width: 14,
+    height: 14,
+    borderRadius: '50%',
+    border: '2px solid white',
+    backgroundColor: '#ff3b30',
+  },
   statusLabel: {
     fontSize: 11,
     fontWeight: 600,
