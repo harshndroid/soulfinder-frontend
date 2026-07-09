@@ -2,7 +2,7 @@ import React from 'react';
 import AppConstants from '../../../constants/AppConstants';
 import Styles from '../../../styles/DashboardStyles';
 
-const Photo = ({ ele, hasUnreadMessage }) => {
+const Photo = ({ ele }) => {
   const isTravellerActive =
     Date.now() - ele.lastSeenAt <=
     AppConstants.LAST_SEEN_DURATION_LIMIT * 60 * 1000
@@ -16,7 +16,6 @@ const Photo = ({ ele, hasUnreadMessage }) => {
       <div style={Styles.imgWrapper}>
         <img alt="img" style={Styles.img} src={ele.photoUrl} />
         <div style={{ ...Styles.statusDot, backgroundColor: statusColor }} />
-        {hasUnreadMessage && <div style={Styles.unreadDot} />}
       </div>
       <div style={Styles.infoWrapper}>
         <div style={Styles.nameRow}>

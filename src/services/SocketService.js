@@ -7,7 +7,7 @@ let socket = null;
 
 export default {
   connect() {
-    if (socket?.connected) return socket;
+    if (socket) return socket;
 
     const user = LocalStorageService.getItem(StorageConstants.USER);
     socket = io(getBaseApiUrl(), {

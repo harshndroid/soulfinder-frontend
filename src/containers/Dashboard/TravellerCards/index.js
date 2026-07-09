@@ -19,7 +19,7 @@ const TravellerCards = ({
     <div style={Styles.travellerCardsWrapper}>
       {nearbyTravellers.map((ele) => (
         <div key={ele._id} style={Styles.cardWrapper}>
-          <Photo ele={ele} hasUnreadMessage={unreadSenderIds.includes(ele._id)} />
+          <Photo ele={ele} />
           {ele.bio && <div style={Styles.bio}>{ele.bio}</div>}
           <div style={Styles.actionsRow}>
             <ChatButton

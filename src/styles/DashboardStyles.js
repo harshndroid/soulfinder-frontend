@@ -73,15 +73,20 @@ export default {
     borderRadius: '50%',
     border: '2px solid white',
   },
-  unreadDot: {
+  chatButtonWrapper: {
+    position: 'relative',
+    flex: 1,
+  },
+  chatUnreadBadge: {
     position: 'absolute',
-    top: -2,
-    right: -2,
-    width: 14,
-    height: 14,
+    top: -4,
+    right: -4,
+    width: 12,
+    height: 12,
     borderRadius: '50%',
     border: '2px solid white',
     backgroundColor: '#ff3b30',
+    pointerEvents: 'none',
   },
   statusLabel: {
     fontSize: 11,
